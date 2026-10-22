@@ -1,0 +1,3 @@
+streamlit>=1.30.0
+experta>=1.9.0
+frozendict>=2.0  # experta 1.9 pin frozendict==1.2 (quebrado no Python 3.10+); >=2 funciona

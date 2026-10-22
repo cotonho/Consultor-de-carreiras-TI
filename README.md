@@ -1,4 +1,4 @@
-# 🧭 Consultor Inteligente de Carreiras em TI
+# Consultor Inteligente de Carreiras em TI
 
 > **Atividade da matéria de Inteligência Artificial (IA)** — Sistema Especialista baseado em Regras (SE-ENTÃO) que entrevista o usuário e recomenda uma das **10 trilhas de carreira em TI**, justificando a decisão com base nas regras disparadas.
 

@@ -1,39 +1,34 @@
-# Consultor Inteligente de Carreiras em TI
+# 🧭 Consultor Avançado de Carreiras em TI
 
-> **Atividade da matéria de Inteligência Artificial (IA)** — Sistema Especialista baseado em Regras (SE-ENTÃO) que entrevista o usuário e recomenda uma das **10 trilhas de carreira em TI**, justificando a decisão com base nas regras disparadas.
+> **Atividade da matéria de Inteligência Artificial (IA)** — Sistema Especialista Baseado em Regras com **tratamento de incerteza e pontuação ponderada** que analisa o perfil multifacetado do usuário, calcula uma **matriz de compatibilidade percentual para 10 trilhas**, identifica **skill gaps** e gera um **roadmap personalizado** (estudo, certificações e portfólio).
 
-- **Motor de inferência:** [Experta](https://github.com/nilp0inter/experta) (forward chaining)
-- **Interface web:** [Streamlit](https://streamlit.io/)
-- **Linguagem:** Python ≥ 3.10
+## Diferenciais (versão 2)
+
+- **Entrada gradual (Likert 1–5):** afinidades respondidas com grau, não sim/não.
+- **Ranking multi-trilha em %:** Top 3 com percentual de aderência (ex.: 1º DevOps 83%, 2º Cloud 65%).
+- **Penalidades lógicas:** perfis conflitantes (ex.: forte design × pouca lógica) reduzem trilhas incompatíveis.
+- **Skill Gap Analysis:** compara o conhecimento atual com o exigido para Júnior na trilha indicada.
+- **Roadmap personalizado:** o que estudar primeiro (priorizando lacunas), certificações e projetos de portfólio.
+- **Base de conhecimento desacoplada:** pesos, regras, gaps e roadmap vivem em `knowledge/regras_carreiras.json`, não no código.
+- **Nunca retorna vazio:** mesmo com respostas vazias/neutras, há sempre uma recomendação.
 
 ## As 10 Trilhas
 
-1. Desenvolvimento Back-end
-2. Desenvolvimento Front-end & UI/UX
-3. Ciência de Dados e Machine Learning
-4. Engenharia de Dados
-5. Cibersegurança (Security / Pentesting)
-6. DevOps & SRE
-7. Computação em Nuvem (Cloud Architecture)
-8. Desenvolvimento Mobile
-9. Engenharia de Qualidade e Testes (QA)
-10. Gestão de Produtos (Product Management)
+Back-end · Front-end & UI/UX · Ciência de Dados e ML · Engenharia de Dados · Cibersegurança · DevOps & SRE · Cloud Architecture · Mobile · QA · Product Management
 
 ## Instalação
 
-> **Importante:** use Python 3.10–3.12 (o Experta ainda não suporta 3.13+). O `requirements.txt` força `frozendict>=2.0` porque a versão antiga pinada pelo Experta quebra no Python 3.10+.
-
 ```bash
-# criar e ativar ambiente virtual (recomendado)
 python -m venv .venv
 # Windows:
 .venv\Scripts\activate
 # Linux/macOS:
 source .venv/bin/activate
 
-# instalar dependências
 pip install -r requirements.txt
 ```
+
+Requer Python ≥ 3.10.
 
 ## Execução
 
@@ -43,35 +38,41 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Abra o endereço exibido no terminal (normalmente `http://localhost:8501`), responda à entrevista e clique em **Diagnosticar trilha**.
+Wizard em 3 etapas: **Passo 1** perfil pessoal → **Passo 2** afinidades (1–5) → **Passo 3** objetivos → **Resultado** (Top 3 em barras + radar, skill gaps e plano de ação).
 
-### Validação com personas (sem interface)
+### Testes
 
 ```bash
+# validação com 10 personas (deve imprimir 10/10)
 python -m tests.personas
+
+# casos-limite e robustez (deve imprimir 11/11)
+python -m tests.edge_cases
 ```
 
-Deve imprimir `Resultado: 10/10 personas corretas`.
+## Como funciona
+
+1. **Entrevista gradual:** 10 afinidades em Likert (1–5) + seleções de objetivo.
+2. **Motor ponderado** (`src/motor.py`): cada resposta multiplica o peso da trilha correspondente; **16 regras SE-ENTÃO** somam bônus e **7 penalidades** reduzem perfis conflitantes.
+3. **Normalização:** placar / pontuação máxima possível × 100 → compatibilidade 0–100% por trilha; ordenação gera o Top 3.
+4. **Plano de ação** (`src/recomendacoes.py`): cruza a trilha vencedora com os conhecimentos marcados → gaps + roadmap priorizado.
 
 ## Estrutura do projeto
 
 ```
 .
-├── app.py                 # Interface Streamlit
+├── app.py                         # Interface Streamlit (wizard)
 ├── requirements.txt
+├── knowledge/
+│   └── regras_carreiras.json      # Base de conhecimento (pesos, regras, gaps, roadmap)
 ├── src/
-│   ├── facts.py           # Classes de Fatos (Fact)
-│   ├── engine.py          # Motor de inferência (regras @Rule)
-│   └── trilhas.py         # Catálogo das 10 trilhas + opções da entrevista
+│   ├── knowledge.py               # Loader dinâmico do JSON
+│   ├── motor.py                   # Motor de inferência ponderado
+│   └── recomendacoes.py           # Skill gaps + roadmap
 ├── tests/
-│   └── personas.py        # 10 personas de validação
+│   ├── personas.py                # 10 personas de validação
+│   └── edge_cases.py              # 11 casos-limite/robustez
 └── docs/
-    ├── PLANO.md           # Planejamento geral do projeto
-    └── MATRIZ_DECISAO.md  # Fase 1 — matriz de decisão e regras
+    ├── PLANO.md                   # Planejamento
+    └── MATRIZ_DECISAO.md          # Matriz de decisão (versão 1)
 ```
-
-## Como funciona
-
-1. **Entrevista (5 dimensões):** afinidade matemática/estatística, preferência de atuação diária, linguagem/ferramenta, tipo de entrega de valor e aspecto técnico mais atrativo.
-2. **Motor de inferência:** ~30 regras `@Rule` com saliência pontuam cada trilha conforme os fatos declarados (forward chaining).
-3. **Consolidação:** a trilha de maior pontuação vence (desempate por nº de regras e ordem do catálogo). A interface exibe a trilha, a pontuação e as regras que motivaram a decisão.

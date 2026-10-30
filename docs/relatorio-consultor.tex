@@ -1,0 +1,598 @@
+\documentclass[12pt,a4paper]{article}
+
+% ------------------------------------------------------------------
+% Pacotes
+% ------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage[a4paper,margin=3cm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage{caption}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black
+}
+
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codekw}{RGB}{0,0,180}
+\definecolor{codestr}{RGB}{150,40,40}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{codekw}\bfseries,
+    stringstyle=\color{codestr},
+    commentstyle=\color{gray},
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    tabsize=4,
+    showstringspaces=false
+}
+
+\title{Sistema Especialista Inteligente para Mapeamento, Compatibilidade\\e Trilha de Carreira em TI}
+\author{Marco Ant\^onio Milagres}
+\date{Outubro de 2026}
+
+\begin{document}
+
+% ------------------------------------------------------------------
+% Capa
+% ------------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    {\large Centro Universit\'ario Presidente Ant\^onio Carlos}\\[0.2cm]
+    {\large UNIPAC -- Barbacena}\\[3cm]
+
+    {\Large\bfseries Sistema Especialista Inteligente para Mapeamento,\\ Compatibilidade e Trilha de Carreira em TI}\\[1cm]
+
+    {\large Relat\'orio da disciplina de Intelig\^encia Artificial}\\[3cm]
+
+    \begin{flushright}
+        \begin{minipage}{0.5\textwidth}
+            Aluno: Marco Ant\^onio Milagres\\
+            Disciplina: Intelig\^encia Artificial
+        \end{minipage}
+    \end{flushright}
+
+    \vfill
+    {\large Barbacena -- MG}\\
+
+    {\large Outubro de 2026}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------
+% 1 Introducao
+% ------------------------------------------------------------------
+\section{Introdu\c{c}\~ao}
+
+O mercado de tecnologia \'e amplo e repleto de ramifica\c{c}\~oes, o que gera d\'uvidas
+em estudantes e profissionais sobre qual caminho seguir. Os sistemas especialistas
+cl\'assicos, baseados apenas em regras SE-ENT\~AO, funcionam bem quando o dom\'inio
+\'e discreto, mas encontram limita\c{c}\~oes quando o mundo real \'e gradual: um
+usu\'ario raramente ``gosta'' ou ``n\~ao gosta'' de uma \'area; ele gosta mais de
+algumas e menos de outras.
+
+Este trabalho apresenta um \textbf{Consultor Avan\c{c}ado de Carreiras e Desenvolvimento
+Profissional} que combina uma base de conhecimento declarativa com um motor de
+infer\^encia de \textbf{pontua\c{c}\~ao ponderada e tratamento de incerteza}. O
+sistema:
+
+\begin{enumerate}
+    \item coleta respostas graduais (escala Likert de 1 a 5) e sele\c{c}\~oes de objetivo;
+    \item calcula uma matriz de compatibilidade percentual para dez trilhas de TI;
+    \item apresenta um ranking (Top~3) com percentuais de ader\^encia;
+    \item identifica \textit{skill gaps} em rela\c{c}\~ao ao n\'ivel J\'unior da trilha recomendada;
+    \item gera um roadmap personalizado (estudos, certifica\c{c}\~oes e portf\'olio).
+\end{enumerate}
+
+O desenvolvimento foi organizado em cinco fases: engenharia do conhecimento (JSON),
+motor de infer\^encia, m\'odulo de gaps e roadmap, interface web em etapas e
+valida\c{c}\~ao com personas e casos-limite.
+
+% ------------------------------------------------------------------
+% 2 Fundamentacao
+% ------------------------------------------------------------------
+\section{Fundamenta\c{c}\~ao Te\'orica}
+
+\subsection{Sistemas especialistas baseados em regras}
+
+Um sistema especialista \'e um programa que reproduz o racioc\'inio de um
+especialista em um dom\'inio restrito \cite{rich1983}. A arquitetura tradicional
+separa:
+
+\begin{itemize}
+    \item \textbf{base de conhecimento}: fatos e regras do dom\'inio;
+    \item \textbf{motor de infer\^encia}: mecanismo que combina fatos e regras
+          (encadeamento para frente ou para tr\'as);
+    \item \textbf{interface}: comunica\c{c}\~ao com o usu\'ario e explica\c{c}\~ao das conclus\~oes.
+\end{itemize}
+
+O desacoplamento entre base e motor \'e um requisito central: a base deve poder ser
+alterada (novos pesos, novas trilhas) sem modificar o c\'odigo do racioc\'inio.
+
+\subsection{Incerteza e pontua\c{c}\~ao ponderada}
+
+Regras bin\'arias n\~ao capturam respostas graduais. Uma alternativa amplamente
+utilizada \'e a \textbf{soma ponderada de atributos}, na qual cada resposta
+multiplica um peso que expressa a correla\c{c}\~ao entre aquele atributo e cada
+alternativa de conclus\~ao. Esse modelo \'e equivalente, em esp\'irito, aos
+\textit{certainty factors} de MYCIN \cite{shortliffe1976}: evid\^encias favor\'aveis
+somam, evid\^encias contr\'arias subtraem, e o resultado \'e normalizado.
+
+Neste trabalho, o papel das ``evid\^encias contr\'arias'' \'e desempenhado por
+\textbf{penalidades l\'ogicas} aplicadas a perfis conflitantes (por exemplo, forte
+afinidade visual com pouca l\'ogica deve reduzir o Back-end).
+
+% ------------------------------------------------------------------
+% 3 Metodologia
+% ------------------------------------------------------------------
+\section{Metodologia e Arquitetura}
+
+\subsection{Arquitetura geral}
+
+A Figura~\ref{fig:arquitetura} resume o fluxo do sistema. A base de conhecimento
+fica em um arquivo JSON externo; o motor l\^e essa base, processa as respostas e
+devolve um diagn\'ostico estruturado; o m\'odulo de recomenda\c{c}\~oes cruza a trilha
+vencedora com os conhecimentos do usu\'ario; a interface Streamlit orquestra o
+fluxo em etapas.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=0.9cm and 0.8cm,
+    caixa/.style={draw, rounded corners, align=center, minimum width=3.2cm,
+                  minimum height=1.1cm, font=\small},
+    seta/.style={-{Latex[length=2mm]}, thick}
+]
+    \node[caixa, fill=blue!8]  (kb)     {Base de\\Conhecimento (JSON)};
+    \node[caixa, fill=green!8, right=1.0cm of kb] (motor) {Motor de Infer\^encia\\Ponderado};
+    \node[caixa, fill=orange!10, right=1.0cm of motor] (rec) {Gaps e\\Roadmap};
+    \node[caixa, fill=red!8, below=2.2cm of motor, xshift=1.2cm,
+          minimum width=9cm] (ui) {Interface Streamlit (wizard)};
+    \node[caixa, fill=gray!10, left=1.0cm of ui] (user) {Usu\'ario};
+
+    \draw[seta] (kb) -- (motor);
+    \draw[seta] (motor) -- (rec);
+    \draw[seta] (user) -- (ui);
+    \draw[seta] ([xshift=-0.8cm]ui.north) --
+        node[left, font=\scriptsize]{respostas} ([xshift=-0.8cm]motor.south);
+    \draw[seta] ([xshift=0.8cm]motor.south) --
+        node[right, font=\scriptsize]{resultado} ([xshift=0.8cm]ui.north);
+    \draw[seta, dashed] (rec.south) --
+        node[left, font=\scriptsize, align=right]{plano de\\a\c{c}\~ao}
+        (rec.south |- ui.north);
+\end{tikzpicture}
+\caption{Arquitetura do sistema.}
+\label{fig:arquitetura}
+\end{figure}
+
+\subsection{Base de conhecimento em JSON}
+
+O arquivo \texttt{knowledge/regras\_carreiras.json} cont\'em:
+
+\begin{itemize}
+    \item \textbf{10 trilhas}, cada uma com nome, descri\c{c}\~ao, conhecimentos
+          exigidos no n\'ivel J\'unior e roadmap (estudos, certifica\c{c}\~oes e projetos);
+    \item \textbf{26 conhecimentos} catalogados e agrupados por categoria;
+    \item \textbf{16 perguntas} (10 Likert e 4 de sele\c{c}\~ao) com pesos de correla\c{c}\~ao
+          por trilha;
+    \item \textbf{16 regras de b\^onus} e \textbf{7 penalidades l\'ogicas}.
+\end{itemize}
+
+A seguir, um trecho ilustrativo de uma regra e de uma pergunta Likert:
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={Trecho da base de conhecimento (JSON).}]
+{
+  "id": "R07",
+  "descricao": "Servidores + infraestrutura alta + arquitetura = Cloud",
+  "condicoes": {
+    "preferencia_diaria": "servidores",
+    "infraestrutura": { "min": 4 },
+    "aspecto_tecnico": "arquitetura"
+  },
+  "efeito": { "cloud": 12 }
+}
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Entrevista gradual}
+
+A entrevista \'e dividida em tr\^es etapas. A Tabela~\ref{tab:perguntas} resume as
+dimens\~oes avaliadas.
+
+\begin{table}[htbp]
+\centering
+\caption{Dimens\~oes da entrevista.}
+\label{tab:perguntas}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Etapa & Dimens\~ao & Tipo \\
+\midrule
+Perfil     & N\'ivel de experi\^encia            & sele\c{c}\~ao \\
+Perfil     & Conhecimentos j\'a dominados        & m\'ultipla escolha \\
+Afinidades & L\'ogica e algoritmos               & Likert 1--5 \\
+Afinidades & Matem\'atica e estat\'istica        & Likert 1--5 \\
+Afinidades & Design visual e interfaces         & Likert 1--5 \\
+Afinidades & Servidores, redes e infraestrutura & Likert 1--5 \\
+Afinidades & An\'alise de dados                 & Likert 1--5 \\
+Afinidades & Seguran\c{c}a da informa\c{c}\~ao   & Likert 1--5 \\
+Afinidades & Automa\c{c}\~ao, processos e qualidade & Likert 1--5 \\
+Afinidades & Gest\~ao, lideran\c{c}a e neg\'ocio & Likert 1--5 \\
+Afinidades & Aplicativos m\'oveis               & Likert 1--5 \\
+Afinidades & Comunica\c{c}\~ao e pessoas        & Likert 1--5 \\
+Objetivos  & Prefer\^encia de atividade di\'aria & sele\c{c}\~ao (9 op\c{c}\~oes) \\
+Objetivos  & Linguagem/ferramenta atual          & sele\c{c}\~ao (4 op\c{c}\~oes) \\
+Objetivos  & Tipo de valor a entregar            & sele\c{c}\~ao (5 op\c{c}\~oes) \\
+Objetivos  & Aspecto t\'ecnico mais atrativo     & sele\c{c}\~ao (5 op\c{c}\~oes) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A Tabela~\ref{tab:pesos} apresenta a matriz de pesos das afinidades (pontos por
+unidade da escala, de 1 a 5). As abrevia\c{c}\~oes s\~ao: Back = Back-end,
+Front = Front-end/UI-UX, CD = Ci\^encia de Dados, ED = Engenharia de Dados,
+Sec = Ciberseguran\c{c}a, DevOps, Cloud, Mob = Mobile, QA e PM = Product Management.
+
+\begin{table}[htbp]
+\centering
+\caption{Pesos das perguntas Likert (por ponto da escala).}
+\label{tab:pesos}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lcccccccccc@{}}
+\toprule
+Dimens\~ao & Back & Front & CD & ED & Sec & DevOps & Cloud & Mob & QA & PM \\
+\midrule
+L\'ogica        & 3 & 1 & 3 & 2 & 3 & 1 & 1 & 3 & 2 & 0 \\
+Matem\'atica    & 2 & 0 & 5 & 3 & 1 & 1 & 1 & 0 & 1 & 1 \\
+Design          & 0 & 4 & 0 & 0 & 0 & 0 & 0 & 2 & 0 & 1 \\
+Infraestrutura  & 2 & 0 & 0 & 3 & 2 & 3 & 3 & 0 & 1 & 0 \\
+Dados           & 1 & 0 & 4 & 4 & 1 & 1 & 1 & 0 & 1 & 1 \\
+Seguran\c{c}a   & 1 & 0 & 0 & 1 & 5 & 2 & 2 & 0 & 1 & 0 \\
+Automa\c{c}\~ao & 1 & 0 & 1 & 2 & 1 & 3 & 2 & 0 & 4 & 1 \\
+Gest\~ao        & 1 & 1 & 0 & 1 & 0 & 1 & 1 & 1 & 0 & 5 \\
+Mobile          & 1 & 2 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 1 \\
+Comunica\c{c}\~ao & 1 & 2 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Motor de infer\^encia}
+
+Seja $L$ o conjunto de perguntas Likert, $S$ o conjunto de perguntas de
+sele\c{c}\~ao e $r_q \in [1,5]$ a resposta \`a pergunta $q$. Para cada pergunta de
+sele\c{c}\~ao, $o_q$ \'e a op\c{c}\~ao escolhida e $p_{q,o,t}$ o peso dessa op\c{c}\~ao
+para a trilha $t$. O placar bruto da trilha $t$ \'e:
+
+\begin{equation}
+S_t = \sum_{q \in L} r_q \, p_{q,t}
+    + \sum_{q \in S} p_{q,o_q,t}
+    + \sum_{k \in R_t} b_k
+    - \sum_{k \in P_t} |b_k|
+\end{equation}
+
+em que $R_t$ e $P_t$ s\~ao, respectivamente, as regras de b\^onus e as penalidades
+disparadas que afetam $t$, e $b_k$ \'e o efeito da regra $k$. A pontua\c{c}\~ao
+m\'axima poss\'ivel $M_t$ representa o perfil perfeito para a trilha:
+
+\begin{equation}
+M_t = \sum_{q \in L} 5\, p_{q,t}
+    + \sum_{q \in S} \max_{o} p_{q,o,t}
+    + \sum_{k \in R} \max(0, b_{k,t})
+\end{equation}
+
+A compatibilidade percentual \'e ent\~ao:
+
+\begin{equation}
+C_t = \max\!\left(0,\; \min\!\left(100,\; \frac{100\, S_t}{M_t}\right)\right)
+\end{equation}
+
+O ranking ordena as trilhas por $C_t$ decrescente. Empates s\~ao desfeitos pelo
+n\'umero de regras disparadas e, por \'ultimo, pela ordem fixa do cat\'alogo ---
+garantindo que \textbf{sempre} exista uma recomenda\c{c}\~ao, mesmo em perfis
+neutros ou com respostas vazias.
+
+\subsection{Regras e penalidades}
+
+As Tabelas~\ref{tab:regras} e~\ref{tab:penalidades} listam as regras de b\^onus e
+as penalidades l\'ogicas. A nota\c{c}\~ao ``$\geq$'' e ``$\leq$'' refere-se \`a resposta
+Likert.
+
+\begin{longtable}{@{}p{1.1cm}p{8.6cm}p{4.2cm}@{}}
+\caption{Regras de b\^onus.}\label{tab:regras}\\
+\toprule
+ID & Condi\c{c}\~ao (resumo) & Efeito \\
+\midrule
+\endfirsthead
+\toprule
+ID & Condi\c{c}\~ao (resumo) & Efeito \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+R01 & Dados brutos, matem\'atica $\geq 4$ e Python & CD +12 \\
+R02 & Dados brutos e an\'alise de dados $\geq 4$ & CD +8, ED +2 \\
+R03 & Pipelines e automa\c{c}\~ao $\geq 4$ & ED +10 \\
+R04 & Prefer\^encia por seguran\c{c}a & Sec +10 \\
+R05 & Seguran\c{c}a e Linux/Redes & Sec +6 \\
+R06 & Servidores, automa\c{c}\~ao $\geq 4$ e aspecto automa\c{c}\~ao & DevOps +10 \\
+R07 & Servidores, infraestrutura $\geq 4$ e aspecto arquitetura & Cloud +12 \\
+R08 & Algoritmos, Python e entrega ao usu\'ario & Back +10 \\
+R09 & Layouts, JavaScript e aspecto cria\c{c}\~ao & Front +10 \\
+R10 & Mobile e JavaScript & Mob +10 \\
+R11 & Qualidade e automa\c{c}\~ao $\geq 3$ & QA +10 \\
+R12 & Neg\'ocio e entrega de valor de neg\'ocio & PM +12 \\
+R13 & Gest\~ao $\geq 4$ e comunica\c{c}\~ao $\geq 4$ & PM +8 \\
+R14 & Design $\geq 4$ e entrega ao usu\'ario & Front +8 \\
+R15 & Matem\'atica $\geq 4$ e dados $\geq 4$ & CD +8 \\
+R16 & Infraestrutura $\geq 4$ e Linux/Redes & DevOps +3, Cloud +3 \\
+\end{longtable}
+
+\begin{longtable}{@{}p{1.1cm}p{8.6cm}p{4.2cm}@{}}
+\caption{Penalidades l\'ogicas.}\label{tab:penalidades}\\
+\toprule
+ID & Condi\c{c}\~ao (resumo) & Efeito \\
+\midrule
+\endfirsthead
+\toprule
+ID & Condi\c{c}\~ao (resumo) & Efeito \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+P01 & Design $\geq 4$ e l\'ogica $\leq 2$ & Back $-6$, ED $-4$ \\
+P02 & L\'ogica $\geq 4$ e design $\leq 2$ & Front $-6$ \\
+P03 & Matem\'atica $\leq 2$ & CD $-8$ \\
+P04 & Infraestrutura $\leq 2$ & DevOps $-6$, Cloud $-6$ \\
+P05 & Automa\c{c}\~ao $\leq 2$ & QA $-5$ \\
+P06 & Seguran\c{c}a $\leq 1$ & Sec $-5$ \\
+P07 & Gest\~ao $\leq 2$ e comunica\c{c}\~ao $\leq 2$ & PM $-6$ \\
+\end{longtable}
+
+\subsection{An\'alise de gaps e roadmap}
+
+Para a trilha vencedora, o m\'odulo de recomenda\c{c}\~oes compara o conjunto de
+conhecimentos marcados pelo usu\'ario com a lista \texttt{nivel\_junior\_requerido}
+da trilha. O percentual de prontid\~ao \'e:
+
+\begin{equation}
+\text{Pronto}(\%) = 100 \cdot \frac{|\text{dominados}|}{|\text{requeridos}|}
+\end{equation}
+
+O roadmap prioriza os itens de estudo que preenchem as lacunas detectadas e, em
+seguida, apresenta os itens complementares, as certifica\c{c}\~oes sugeridas e os
+projetos de portf\'olio.
+
+% ------------------------------------------------------------------
+% 4 Implementacao
+% ------------------------------------------------------------------
+\clearpage
+\section{Implementa\c{c}\~ao}
+
+\subsection{Estrutura do reposit\'orio}
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=bash, caption={Estrutura de arquivos.}]
+.
+|-- app.py                         # Interface Streamlit (wizard)
+|-- requirements.txt               # streamlit, pandas, plotly
+|-- knowledge/
+|   `-- regras_carreiras.json      # Base de conhecimento
+|-- src/
+|   |-- knowledge.py               # Loader do JSON
+|   |-- motor.py                   # Motor ponderado
+|   `-- recomendacoes.py           # Gaps e roadmap
+|-- tests/
+|   |-- personas.py                # 10 personas
+|   |-- edge_cases.py              # 11 casos-limite
+|   `-- test_app.py                # Teste de fumaca da interface
+`-- docs/
+    `-- relatorio-consultor.tex    # Este relatorio
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Trechos de c\'odigo}
+
+O n\'ucleo do motor percorre as perguntas acumulando a contribui\c{c}\~ao ponderada
+e, depois, aplica as regras e penalidades:
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, caption={N\'ucleo do c\'alculo de pontua\c{c}\~ao.}]
+placar = {t: 0.0 for t in kb.trilhas}
+
+# 1) respostas ponderadas (Likert e selecoes)
+for p in kb.perguntas:
+    valor = respostas.get(p.id)
+    if p.tipo == "likert" and valor is not None:
+        for trilha, peso in p.pesos.items():
+            placar[trilha] += valor * peso
+    elif p.tipo == "selecao" and valor in p.pesos_por_opcao:
+        for trilha, peso in p.pesos_por_opcao[valor].items():
+            placar[trilha] += peso
+
+# 2) regras de bonus e penalidades
+for regra in kb.regras + kb.penalidades:
+    if condicao_atendida(regra.condicoes, respostas):
+        for trilha, valor in regra.efeito.items():
+            placar[trilha] += valor
+
+# 3) normalizacao 0-100%
+compatibilidade = {
+    t: max(0, min(100, round(100 * pts / maximo[t])))
+    for t, pts in placar.items()
+}
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Interface web em etapas}
+
+A interface Streamlit foi organizada como um \textit{wizard} de tr\^es passos,
+seguindo o padr\~ao de navega\c{c}\~ao com estado de sess\~ao:
+
+\begin{enumerate}
+    \item \textbf{Passo 1}: perfil pessoal (experi\^encia e conhecimentos atuais);
+    \item \textbf{Passo 2}: afinidades t\'ecnicas em dez controles deslizantes (1--5);
+    \item \textbf{Passo 3}: objetivos de carreira (quatro sele\c{c}\~oes);
+    \item \textbf{Resultado}: Top~3 em gr\'aficos de barras e radar, tabela com o
+          placar das dez trilhas, abas de \textit{skill gaps} e plano de a\c{c}\~ao.
+\end{enumerate}
+
+A execu\c{c}\~ao local \'e feita com \texttt{streamlit run app.py}; a valida\c{c}\~ao
+com personas e casos-limite, com \texttt{python -m tests.personas} e
+\texttt{python -m tests.edge\_cases}.
+
+% ------------------------------------------------------------------
+% 5 Resultados
+% ------------------------------------------------------------------
+\section{Resultados e Valida\c{c}\~ao}
+
+\subsection{Personas}
+
+Foram constru\'idas dez personas para cobrir as dez trilhas. A
+Tabela~\ref{tab:personas} mostra o resultado obtido (trilha recomendada e
+compatibilidade) e o Top~3.
+
+\begin{table}[htbp]
+\centering
+\caption{Valida\c{c}\~ao com personas (10/10 corretas).}
+\label{tab:personas}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llcl@{}}
+\toprule
+Persona & Perfil & Obtido & Top~3 (compatibilidade) \\
+\midrule
+Ana      & Anal\'itico        & CD (94\%)    & CD 94, ED 68, QA 51 \\
+Bruno    & Infra/automa\c{c}\~ao & DevOps (83\%) & DevOps 83, Cloud 65, ED 58 \\
+Carla    & Visual             & Front (88\%) & Front 88, Mob 60, PM 45 \\
+Diego    & Neg\'ocios         & PM (84\%)    & PM 84, Front 37, Mob 32 \\
+Eva      & Arquitetura cloud  & Cloud (83\%) & Cloud 83, DevOps 68, ED 58 \\
+F\'abio  & Eng. de dados      & ED (80\%)    & ED 80, DevOps 55, QA 53 \\
+Gabriela & Seguran\c{c}a      & Sec (83\%)   & Sec 83, DevOps 54, Cloud 50 \\
+Henrique & Back-end           & Back (73\%)  & Back 73, QA 51, ED 50 \\
+Isabela  & Mobile             & Mob (88\%)   & Mob 88, Front 73, PM 48 \\
+Jo\~ao   & QA                 & QA (68\%)    & QA 68, Back 36, Mob 33 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+O sistema acertou a trilha esperada em todas as dez personas. Observa-se que os
+pares pr\'oximos s\~ao corretamente separados: Ci\^encia de Dados versus Engenharia
+de Dados (matem\'atica e ``dados/insights'' versus pipelines e infraestrutura),
+DevOps versus Cloud (automa\c{c}\~ao versus arquitetura) e Front-end versus Mobile
+(JavaScript/layouts versus mobile expl\'icito).
+
+\subsection{Casos-limite}
+
+Al\'em das personas, foram implementados onze testes de robustez
+(Tabela~\ref{tab:edge}), todos aprovados:
+
+\begin{table}[htbp]
+\centering
+\caption{Testes de robustez e casos-limite (11/11).}
+\label{tab:edge}
+\footnotesize
+\begin{tabular}{@{}cl@{}}
+\toprule
+\# & Caso testado \\
+\midrule
+1  & Perfil totalmente neutro (todas as respostas 3) \\
+2  & Respostas m\'inimas (todas 1) \\
+3  & Respostas m\'aximas (todas 5) \\
+4  & Dicion\'ario de respostas vazio \\
+5  & Respostas parciais (somente afinidades) \\
+6  & Perfil amb\'iguo (dados e desenvolvimento web) \\
+7  & Empate exato com desempate determin\'istico \\
+8  & Percentuais sempre entre 0 e 100 \\
+9  & Gaps sem conhecimentos (roadmap prioriza lacunas) \\
+10 & Gaps com todos os conhecimentos (100\%, sem pend\^encias) \\
+11 & Conhecimento desconhecido no input ignorado com seguran\c{c}a \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Exemplo de diagn\'ostico}
+
+Para a persona Bruno (perfil de infraestrutura), o sistema retornou:
+1\textordmasculine{} DevOps com 83\%, 2\textordmasculine{} Cloud com 65\% e
+3\textordmasculine{} Engenharia de Dados com 58\%. As regras disparadas inclu\'iram
+R06 (``servidores, automa\c{c}\~ao $\geq 4$ e aspecto automa\c{c}\~ao'') e R16
+(``infraestrutura $\geq 4$ e Linux/Redes''), al\'em da contribui\c{c}\~ao das
+respostas Likert. O m\'odulo de gaps apontou as lacunas de conhecimentos e o
+roadmap priorizou Docker, CI/CD e redes.
+
+% ------------------------------------------------------------------
+% 6 Conclusao
+% ------------------------------------------------------------------
+\section{Conclus\~ao}
+
+O trabalho atingiu os objetivos propostos: a base de conhecimento foi
+desacoplada do c\'odigo em um arquivo JSON, o motor de infer\^encia passou a lidar
+com respostas graduais e incerteza por meio de soma ponderada com penalidades
+l\'ogicas, e a recomenda\c{c}\~ao deixou de ser \'unica para se tornar um ranking
+percentual. O sistema identifica \textit{skill gaps} e gera um plano de a\c{c}\~ao
+individualizado, e a interface em etapas torna a experi\^encia mais pr\'oxima de
+uma consultoria real.
+
+Os resultados de valida\c{c}\~ao (10/10 personas e 11/11 casos-limite, incluindo
+respostas vazias) confirmam a robustez do motor: ele sempre produz uma
+recomenda\c{c}\~ao coerente e justific\'avel. Como trabalhos futuros, pode-se
+ampliar o cat\'alogo de trilhas, calibrar os pesos com especialistas e incorporar
+feedback do usu\'ario para ajuste cont\'inuo do modelo.
+
+% ------------------------------------------------------------------
+% Referencias
+% ------------------------------------------------------------------
+\begin{thebibliography}{9}
+
+\bibitem{rich1983}
+RICH, E. \textit{Artificial Intelligence}. New York: McGraw-Hill, 1983.
+
+\bibitem{shortliffe1976}
+SHORTLIFFE, E. H. \textit{Computer-Based Medical Consultations: MYCIN}.
+New York: Elsevier, 1976.
+
+\bibitem{experta}
+NILP0INTER. \textit{Experta: Expert Systems for Python}. Reposit\'orio GitHub.
+Dispon\'ivel em: \url{https://github.com/nilp0inter/experta}.
+Acesso em: out. 2026.
+
+\bibitem{streamlit}
+STREAMLIT. \textit{Streamlit Documentation}.
+Dispon\'ivel em: \url{https://docs.streamlit.io}.
+Acesso em: out. 2026.
+
+\bibitem{pandas}
+PANDAS. \textit{pandas Documentation}.
+Dispon\'ivel em: \url{https://pandas.pydata.org/docs/}.
+Acesso em: out. 2026.
+
+\bibitem{plotly}
+PLOTLY. \textit{Plotly Python Open Source Graphing Library}.
+Dispon\'ivel em: \url{https://plotly.com/python/}.
+Acesso em: out. 2026.
+
+\end{thebibliography}
+
+\end{document}

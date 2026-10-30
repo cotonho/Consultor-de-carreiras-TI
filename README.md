@@ -48,7 +48,27 @@ python -m tests.personas
 
 # casos-limite e robustez (deve imprimir 11/11)
 python -m tests.edge_cases
+
+# teste de fumaça do wizard completo (Perfil -> Afinidades -> Objetivos -> Resultado)
+python -m tests.test_app
 ```
+
+## Relatório
+
+O relatório técnico da atividade está em **`docs/relatorio-consultor.tex`** (LaTeX),
+com a versão compilada em **`docs/relatorio-consultor.pdf`**.
+
+Para recompilar:
+
+```bash
+cd docs
+pdflatex relatorio-consultor.tex
+pdflatex relatorio-consultor.tex   # segunda passada: sumário e referências cruzadas
+```
+
+Ou, sem instalar nada, importe o `.tex` no [Overleaf](https://www.overleaf.com/).
+O documento usa apenas pacotes de uma instalação LaTeX completa
+(`babel`, `tikz`, `booktabs`, `longtable`, `listings`).
 
 ## Como funciona
 
@@ -71,8 +91,10 @@ python -m tests.edge_cases
 │   └── recomendacoes.py           # Skill gaps + roadmap
 ├── tests/
 │   ├── personas.py                # 10 personas de validação
-│   └── edge_cases.py              # 11 casos-limite/robustez
+│   ├── edge_cases.py              # 11 casos-limite/robustez
+│   └── test_app.py                # Teste de fumaça da interface
 └── docs/
+    ├── relatorio-consultor.tex    # Relatório da atividade (LaTeX)
     ├── PLANO.md                   # Planejamento
     └── MATRIZ_DECISAO.md          # Matriz de decisão (versão 1)
 ```

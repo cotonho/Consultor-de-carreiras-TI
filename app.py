@@ -18,7 +18,6 @@ from src.recomendacoes import plano_de_acao
 
 st.set_page_config(
     page_title="Consultor Avancado de Carreiras em TI",
-    page_icon="🧭",
     layout="wide",
 )
 
@@ -154,7 +153,7 @@ def render_etapa_objetivos():
     if c1.button("← Voltar"):
         st.session_state.etapa = 1
         st.rerun()
-    if c2.button("🔍 Diagnosticar", type="primary"):
+    if c2.button("Diagnosticar", type="primary"):
         st.session_state.respostas.update(respostas)
         st.session_state.resultado = MOTOR.diagnosticar(st.session_state.respostas)
         st.session_state.etapa = 3
@@ -173,11 +172,11 @@ def render_resultado():
             st.rerun()
         return
 
-    st.success(f"### 🎯 Trilha recomendada: {rec['nome']} — {rec['compatibilidade']}% de compatibilidade")
+    st.success(f"### Trilha recomendada: {rec['nome']} — {rec['compatibilidade']}% de compatibilidade")
     st.caption(rec["descricao"])
 
     tab_ranking, tab_gaps, tab_plano = st.tabs(
-        ["🏆 Ranking de compatibilidade", "🔍 Skill Gaps (nível Júnior)", "🗺️ Plano de ação"]
+        ["Ranking de compatibilidade", "Skill Gaps (nível Júnior)", "Plano de ação"]
     )
 
     with tab_ranking:
@@ -204,7 +203,7 @@ def render_resultado():
         )
         st.dataframe(df, width="stretch", hide_index=True)
 
-        with st.expander("📝 Explicação do motor"):
+        with st.expander("Explicação do motor"):
             for linha in resultado["explicacao"]:
                 st.write("• " + linha)
 
@@ -215,13 +214,13 @@ def render_resultado():
         st.write(f"Você já domina **{gaps['pronto_percentual']}%** dos conhecimentos requeridos.")
         c1, c2 = st.columns(2)
         with c1:
-            st.markdown("**✅ Você já tem:**")
+            st.markdown("**Você já tem:**")
             for k in gaps["dominados"]:
                 st.markdown(f"- {gaps['rotulos'][k]}")
             if not gaps["dominados"]:
                 st.caption("Nenhum ainda — tudo a construir.")
         with c2:
-            st.markdown("**❌ Lacunas (faltantes):**")
+            st.markdown("**Lacunas (faltantes):**")
             for k in gaps["faltantes"]:
                 st.markdown(f"- {gaps['rotulos'][k]}")
             if gaps["pronto_para_junior"]:
@@ -243,7 +242,7 @@ def render_resultado():
         for p in plano["projetos_portfolio"]:
             st.markdown(f"- {p}")
 
-    if st.button("🔄 Refazer diagnóstico", width="stretch"):
+    if st.button("Refazer diagnóstico", width="stretch"):
         st.session_state.etapa = 0
         st.session_state.respostas = {}
         st.rerun()
@@ -251,7 +250,7 @@ def render_resultado():
 
 def main():
     init_state()
-    st.title("🧭 Consultor Avancado de Carreiras em TI")
+    st.title("Consultor Avancado de Carreiras em TI")
     st.caption(
         "Sistema Especialista com tratamento de incerteza: respostas graduais (1-5), "
         "ranking multi-trilha em %, análise de skill gaps e roadmap personalizado."

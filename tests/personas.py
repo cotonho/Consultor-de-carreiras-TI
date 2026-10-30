@@ -1,139 +1,252 @@
-"""Validação do motor de inferência com personas de teste (Fase 4).
+"""Validacao do motor ponderado com personas de teste (Fase 4/5).
 
-Execução:  py -3.11 -m tests.personas
+Execucao:  py -3.11 -m tests.personas
 """
 
-from src.engine import ConsultorCarreiras
+from src.motor import MotorPonderado
 
 PERSONAS = [
     {
-        "nome": "Ana — perfil analítico (Ciência de Dados)",
+        "nome": "Ana - perfil analitico (Ciencia de Dados)",
         "esperado": "ciencia_dados",
         "respostas": {
-            "afinidade": "alta",
-            "preferencia": "dados_brutos",
+            "experiencia": "estudante",
+            "conhecimentos": ["logica", "git", "python", "estatistica", "pandas"],
+            "logica_algoritmos": 4,
+            "matematica_estatistica": 5,
+            "design_visual": 1,
+            "infraestrutura": 2,
+            "dados_analise": 5,
+            "seguranca": 2,
+            "automacao_qualidade": 3,
+            "gestao_lideranca": 2,
+            "mobile_apps": 1,
+            "comunicacao_pessoas": 3,
+            "preferencia_diaria": "dados_brutos",
             "linguagem": "python",
-            "entrega": "dados_insights",
-            "aspecto": "descoberta",
+            "entrega_valor": "dados_insights",
+            "aspecto_tecnico": "descoberta",
         },
     },
     {
-        "nome": "Bruno — perfil infra/segurança (DevOps)",
+        "nome": "Bruno - perfil infra/automacao (DevOps)",
         "esperado": "devops",
         "respostas": {
-            "afinidade": "media",
-            "preferencia": "servidores",
+            "experiencia": "estudante",
+            "conhecimentos": ["logica", "git", "linux"],
+            "logica_algoritmos": 3,
+            "matematica_estatistica": 2,
+            "design_visual": 1,
+            "infraestrutura": 5,
+            "dados_analise": 3,
+            "seguranca": 3,
+            "automacao_qualidade": 5,
+            "gestao_lideranca": 2,
+            "mobile_apps": 1,
+            "comunicacao_pessoas": 2,
+            "preferencia_diaria": "servidores",
             "linguagem": "linux_redes",
-            "entrega": "infraestrutura",
-            "aspecto": "automacao",
+            "entrega_valor": "infraestrutura",
+            "aspecto_tecnico": "automacao",
         },
     },
     {
-        "nome": "Carla — perfil visual (Front-end)",
+        "nome": "Carla - perfil visual (Front-end)",
         "esperado": "front",
         "respostas": {
-            "afinidade": "baixa",
-            "preferencia": "layouts",
+            "experiencia": "estudante",
+            "conhecimentos": ["logica", "git", "javascript"],
+            "logica_algoritmos": 2,
+            "matematica_estatistica": 1,
+            "design_visual": 5,
+            "infraestrutura": 1,
+            "dados_analise": 1,
+            "seguranca": 1,
+            "automacao_qualidade": 1,
+            "gestao_lideranca": 3,
+            "mobile_apps": 3,
+            "comunicacao_pessoas": 4,
+            "preferencia_diaria": "layouts",
             "linguagem": "javascript",
-            "entrega": "usuario_final",
-            "aspecto": "criacao",
+            "entrega_valor": "usuario_final",
+            "aspecto_tecnico": "criacao",
         },
     },
     {
-        "nome": "Diego — perfil negócios (Product Management)",
+        "nome": "Diego - perfil negocios (Product Management)",
         "esperado": "product",
         "respostas": {
-            "afinidade": "baixa",
-            "preferencia": "negocio",
+            "experiencia": "nenhum",
+            "conhecimentos": ["comunicacao"],
+            "logica_algoritmos": 1,
+            "matematica_estatistica": 1,
+            "design_visual": 2,
+            "infraestrutura": 1,
+            "dados_analise": 2,
+            "seguranca": 1,
+            "automacao_qualidade": 2,
+            "gestao_lideranca": 5,
+            "mobile_apps": 1,
+            "comunicacao_pessoas": 5,
+            "preferencia_diaria": "negocio",
             "linguagem": "nenhuma",
-            "entrega": "negocio",
-            "aspecto": "criacao",
+            "entrega_valor": "negocio",
+            "aspecto_tecnico": "criacao",
         },
     },
     {
-        "nome": "Eva — arquiteta de nuvem (Cloud)",
+        "nome": "Eva - arquiteta de nuvem (Cloud)",
         "esperado": "cloud",
         "respostas": {
-            "afinidade": "media",
-            "preferencia": "servidores",
+            "experiencia": "estudante",
+            "conhecimentos": ["linux", "docker", "redes"],
+            "logica_algoritmos": 3,
+            "matematica_estatistica": 2,
+            "design_visual": 1,
+            "infraestrutura": 5,
+            "dados_analise": 3,
+            "seguranca": 3,
+            "automacao_qualidade": 4,
+            "gestao_lideranca": 3,
+            "mobile_apps": 1,
+            "comunicacao_pessoas": 3,
+            "preferencia_diaria": "servidores",
             "linguagem": "linux_redes",
-            "entrega": "infraestrutura",
-            "aspecto": "arquitetura",
+            "entrega_valor": "infraestrutura",
+            "aspecto_tecnico": "arquitetura",
         },
     },
     {
-        "nome": "Fábio — engenheiro de dados",
+        "nome": "Fabio - engenheiro de dados",
         "esperado": "engenharia_dados",
         "respostas": {
-            "afinidade": "media",
-            "preferencia": "dados_brutos",
+            "experiencia": "estudante",
+            "conhecimentos": ["git", "python", "sql", "pandas"],
+            "logica_algoritmos": 3,
+            "matematica_estatistica": 3,
+            "design_visual": 1,
+            "infraestrutura": 4,
+            "dados_analise": 5,
+            "seguranca": 2,
+            "automacao_qualidade": 4,
+            "gestao_lideranca": 2,
+            "mobile_apps": 1,
+            "comunicacao_pessoas": 2,
+            "preferencia_diaria": "pipelines",
             "linguagem": "python",
-            "entrega": "infraestrutura",
-            "aspecto": "automacao",
+            "entrega_valor": "infraestrutura",
+            "aspecto_tecnico": "automacao",
         },
     },
     {
-        "nome": "Gabriela — segurança ofensiva",
+        "nome": "Gabriela - seguranca ofensiva",
         "esperado": "ciberseguranca",
         "respostas": {
-            "afinidade": "media",
-            "preferencia": "seguranca",
+            "experiencia": "estudante",
+            "conhecimentos": ["linux", "redes", "git"],
+            "logica_algoritmos": 3,
+            "matematica_estatistica": 2,
+            "design_visual": 1,
+            "infraestrutura": 4,
+            "dados_analise": 2,
+            "seguranca": 5,
+            "automacao_qualidade": 3,
+            "gestao_lideranca": 2,
+            "mobile_apps": 1,
+            "comunicacao_pessoas": 2,
+            "preferencia_diaria": "seguranca",
             "linguagem": "linux_redes",
-            "entrega": "seguranca",
-            "aspecto": "resolucao",
+            "entrega_valor": "seguranca",
+            "aspecto_tecnico": "resolucao",
         },
     },
     {
-        "nome": "Henrique — desenvolvedor back-end",
+        "nome": "Henrique - desenvolvedor back-end",
         "esperado": "back",
         "respostas": {
-            "afinidade": "media",
-            "preferencia": "algoritmos",
+            "experiencia": "estagiario",
+            "conhecimentos": ["logica", "git", "python", "sql"],
+            "logica_algoritmos": 5,
+            "matematica_estatistica": 3,
+            "design_visual": 1,
+            "infraestrutura": 3,
+            "dados_analise": 2,
+            "seguranca": 2,
+            "automacao_qualidade": 3,
+            "gestao_lideranca": 2,
+            "mobile_apps": 2,
+            "comunicacao_pessoas": 2,
+            "preferencia_diaria": "algoritmos",
             "linguagem": "python",
-            "entrega": "usuario_final",
-            "aspecto": "arquitetura",
+            "entrega_valor": "usuario_final",
+            "aspecto_tecnico": "arquitetura",
         },
     },
     {
-        "nome": "Isabela — desenvolvedora mobile",
+        "nome": "Isabela - desenvolvedora mobile",
         "esperado": "mobile",
         "respostas": {
-            "afinidade": "media",
-            "preferencia": "mobile",
+            "experiencia": "estudante",
+            "conhecimentos": ["logica", "git", "javascript"],
+            "logica_algoritmos": 3,
+            "matematica_estatistica": 2,
+            "design_visual": 4,
+            "infraestrutura": 1,
+            "dados_analise": 2,
+            "seguranca": 2,
+            "automacao_qualidade": 2,
+            "gestao_lideranca": 3,
+            "mobile_apps": 5,
+            "comunicacao_pessoas": 4,
+            "preferencia_diaria": "mobile",
             "linguagem": "javascript",
-            "entrega": "usuario_final",
-            "aspecto": "criacao",
+            "entrega_valor": "usuario_final",
+            "aspecto_tecnico": "criacao",
         },
     },
     {
-        "nome": "João — engenheiro de QA",
+        "nome": "Joao - engenheiro de QA",
         "esperado": "qa",
         "respostas": {
-            "afinidade": "baixa",
-            "preferencia": "qualidade",
+            "experiencia": "nenhum",
+            "conhecimentos": ["git"],
+            "logica_algoritmos": 2,
+            "matematica_estatistica": 1,
+            "design_visual": 2,
+            "infraestrutura": 2,
+            "dados_analise": 2,
+            "seguranca": 2,
+            "automacao_qualidade": 4,
+            "gestao_lideranca": 2,
+            "mobile_apps": 2,
+            "comunicacao_pessoas": 2,
+            "preferencia_diaria": "qualidade",
             "linguagem": "nenhuma",
-            "entrega": "usuario_final",
-            "aspecto": "resolucao",
+            "entrega_valor": "usuario_final",
+            "aspecto_tecnico": "resolucao",
         },
     },
 ]
 
 
 def rodar() -> int:
-    motor = ConsultorCarreiras()
+    motor = MotorPonderado()
     acertos = 0
 
     for persona in PERSONAS:
-        r = motor.diagnosticar(**persona["respostas"])
-        ok = r["trilha"] == persona["esperado"]
+        r = motor.diagnosticar(persona["respostas"])
+        rec = r["recomendacao"]
+        ok = rec is not None and rec["trilha"] == persona["esperado"]
         acertos += ok
         status = "OK " if ok else "FALHOU"
         print(f"[{status}] {persona['nome']}")
-        print(f"         esperado={persona['esperado']} | obtido={r['trilha']} | pontos={r['pontuacao']}")
+        if rec:
+            top3 = " | ".join(
+                f"{i+1}º {t['nome']} {t['compatibilidade']}%" for i, t in enumerate(r["top3"])
+            )
+            print(f"         top3: {top3}")
         if not ok:
-            print(f"         placar completo: {r['placar']}")
-            for m in motor.motivos:
-                print(f"           - {m['trilha']}: +{m['pontos']} ({m['motivo']})")
+            print(f"         esperado={persona['esperado']} | obtido={rec and rec['trilha']}")
         print()
 
     total = len(PERSONAS)

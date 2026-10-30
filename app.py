@@ -1,4 +1,4 @@
-"""Interface web do Consultor Avancado de Carreiras em TI (wizard em etapas).
+﻿"""Interface web do Consultor Avancado de Carreiras em TI (wizard em etapas).
 
 Execucao:  streamlit run app.py
 """
@@ -105,7 +105,7 @@ def render_etapa_perfil():
             )
             conhecimentos.extend(marcar)
 
-    if st.button("Avançar →", type="primary", use_container_width=True):
+    if st.button("Avançar →", type="primary", width="stretch"):
         st.session_state.respostas["experiencia"] = experiencia
         st.session_state.respostas["conhecimentos"] = conhecimentos
         st.session_state.etapa = 1
@@ -119,7 +119,7 @@ def render_etapa_afinidades():
     perguntas = KB.perguntas_da_etapa("afinidades")
     cols = st.columns(2)
     for i, p in enumerate(perguntas):
-        with cols[i % 2].st.container():
+        with cols[i % 2].container():
             respostas[p.id] = st.slider(
                 f"{p.titulo}",
                 min_value=p.min,
@@ -183,9 +183,9 @@ def render_resultado():
     with tab_ranking:
         c1, c2 = st.columns([3, 2])
         with c1:
-            st.plotly_chart(barras_top3(resultado["top3"]), use_container_width=True)
+            st.plotly_chart(barras_top3(resultado["top3"]), width="stretch")
         with c2:
-            st.plotly_chart(radar_compatibilidade(resultado["compatibilidade"]), use_container_width=True)
+            st.plotly_chart(radar_compatibilidade(resultado["compatibilidade"]), width="stretch")
 
         st.subheader("Top 3 em detalhes")
         for i, t in enumerate(resultado["top3"], 1):
@@ -202,7 +202,7 @@ def render_resultado():
                 for t, v in sorted(resultado["compatibilidade"].items(), key=lambda kv: -kv[1])
             ]
         )
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.dataframe(df, width="stretch", hide_index=True)
 
         with st.expander("📝 Explicação do motor"):
             for linha in resultado["explicacao"]:
@@ -243,7 +243,7 @@ def render_resultado():
         for p in plano["projetos_portfolio"]:
             st.markdown(f"- {p}")
 
-    if st.button("🔄 Refazer diagnóstico", use_container_width=True):
+    if st.button("🔄 Refazer diagnóstico", width="stretch"):
         st.session_state.etapa = 0
         st.session_state.respostas = {}
         st.rerun()

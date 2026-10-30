@@ -1,4 +1,4 @@
-# 🧭 Consultor Avançado de Carreiras em TI
+# Consultor Avançado de Carreiras em TI
 
 > **Atividade da matéria de Inteligência Artificial (IA)** — Sistema Especialista Baseado em Regras com **tratamento de incerteza e pontuação ponderada** que analisa o perfil multifacetado do usuário, calcula uma **matriz de compatibilidade percentual para 10 trilhas**, identifica **skill gaps** e gera um **roadmap personalizado** (estudo, certificações e portfólio).
 

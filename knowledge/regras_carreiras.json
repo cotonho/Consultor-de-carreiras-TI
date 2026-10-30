@@ -1,0 +1,1531 @@
+{
+  "versao": "2.0",
+  "descricao": "Base de conhecimento do Consultor Avancado de Carreiras em TI.",
+  "conhecimentos": {
+    "logica": {
+      "nome": "Logica de programacao",
+      "categoria": "Fundamentos"
+    },
+    "git": {
+      "nome": "Git e GitHub",
+      "categoria": "Fundamentos"
+    },
+    "http_rest": {
+      "nome": "HTTP e APIs REST",
+      "categoria": "Fundamentos"
+    },
+    "python": {
+      "nome": "Python",
+      "categoria": "Programacao"
+    },
+    "javascript": {
+      "nome": "JavaScript / TypeScript",
+      "categoria": "Programacao"
+    },
+    "react": {
+      "nome": "React (ou similar)",
+      "categoria": "Programacao"
+    },
+    "mobile_dev": {
+      "nome": "Flutter / React Native / nativo",
+      "categoria": "Programacao"
+    },
+    "sql": {
+      "nome": "SQL e modelagem de dados",
+      "categoria": "Dados"
+    },
+    "pandas": {
+      "nome": "Manipulacao de dados (Pandas/NumPy)",
+      "categoria": "Dados"
+    },
+    "estatistica": {
+      "nome": "Estatistica",
+      "categoria": "Dados"
+    },
+    "ml": {
+      "nome": "Machine Learning",
+      "categoria": "Dados"
+    },
+    "etl_pipelines": {
+      "nome": "Pipelines de dados (ETL/ELT)",
+      "categoria": "Dados"
+    },
+    "linux": {
+      "nome": "Linux (linha de comando)",
+      "categoria": "Infraestrutura"
+    },
+    "redes": {
+      "nome": "Redes (TCP/IP, DNS)",
+      "categoria": "Infraestrutura"
+    },
+    "docker": {
+      "nome": "Docker e conteineres",
+      "categoria": "Infraestrutura"
+    },
+    "ci_cd": {
+      "nome": "CI/CD e automacao de deploy",
+      "categoria": "Infraestrutura"
+    },
+    "cloud_aws": {
+      "nome": "Nuvem (AWS/Azure/GCP)",
+      "categoria": "Infraestrutura"
+    },
+    "testes_auto": {
+      "nome": "Testes automatizados (Pytest, Cypress)",
+      "categoria": "Qualidade e Seguranca"
+    },
+    "qualidade": {
+      "nome": "Processos de qualidade (SDLC)",
+      "categoria": "Qualidade e Seguranca"
+    },
+    "seguranca_web": {
+      "nome": "Seguranca web (OWASP Top 10)",
+      "categoria": "Qualidade e Seguranca"
+    },
+    "pentest": {
+      "nome": "Pentest e vulnerabilidades",
+      "categoria": "Qualidade e Seguranca"
+    },
+    "figma": {
+      "nome": "Design de interfaces (Figma)",
+      "categoria": "Design"
+    },
+    "agil": {
+      "nome": "Metodologias ageis (Scrum/Kanban)",
+      "categoria": "Gestao"
+    },
+    "product_discovery": {
+      "nome": "Product discovery e priorizacao",
+      "categoria": "Gestao"
+    },
+    "requisitos": {
+      "nome": "Analise e documentacao de requisitos",
+      "categoria": "Gestao"
+    },
+    "comunicacao": {
+      "nome": "Comunicacao e apresentacao",
+      "categoria": "Gestao"
+    }
+  },
+  "trilhas": {
+    "back": {
+      "nome": "Desenvolvimento Back-end",
+      "descricao": "Logica de servidores, APIs, regras de negocio e bancos de dados.",
+      "nivel_junior_requerido": [
+        "logica",
+        "git",
+        "python",
+        "sql",
+        "http_rest"
+      ],
+      "roadmap": {
+        "estudar_primeiro": [
+          {
+            "item": "Logica e algoritmos (estruturas de dados)",
+            "preenche": "logica"
+          },
+          {
+            "item": "Python: do zero a uma API",
+            "preenche": "python"
+          },
+          {
+            "item": "Git e GitHub no fluxo diario",
+            "preenche": "git"
+          },
+          {
+            "item": "SQL e modelagem de dados relacionais",
+            "preenche": "sql"
+          },
+          {
+            "item": "HTTP, REST e boas praticas de APIs",
+            "preenche": "http_rest"
+          }
+        ],
+        "certificacoes": [
+          "PCEP - Certified Entry-Level Python Programmer",
+          "AWS Cloud Practitioner (fundamentos)"
+        ],
+        "projetos_portfolio": [
+          "API REST (FastAPI/Flask) de ToDo List com autenticacao JWT",
+          "CRUD completo com PostgreSQL e testes automatizados",
+          "Consumo de API de terceiros com tratamento de erros e logs"
+        ]
+      }
+    },
+    "front": {
+      "nome": "Desenvolvimento Front-end & UI/UX",
+      "descricao": "Interfaces web responsivas, experiencia do usuario e frameworks reativos.",
+      "nivel_junior_requerido": [
+        "logica",
+        "git",
+        "javascript",
+        "react",
+        "figma"
+      ],
+      "roadmap": {
+        "estudar_primeiro": [
+          {
+            "item": "HTML, CSS e JavaScript moderno",
+            "preenche": "javascript"
+          },
+          {
+            "item": "Componentizacao com React",
+            "preenche": "react"
+          },
+          {
+            "item": "Git e GitHub",
+            "preenche": "git"
+          },
+          {
+            "item": "Logica de programacao",
+            "preenche": "logica"
+          },
+          {
+            "item": "Fundamentos de UI/UX no Figma",
+            "preenche": "figma"
+          }
+        ],
+        "certificacoes": [
+          "Meta Front-End Developer (Coursera)",
+          "W3Schools Front End Developer"
+        ],
+        "projetos_portfolio": [
+          "Landing page responsiva com acessibilidade",
+          "App React consumindo API publica com estados e rotas",
+          "Redesign de um app existente (Figma + codigo)"
+        ]
+      }
+    },
+    "ciencia_dados": {
+      "nome": "Ciencia de Dados e Machine Learning",
+      "descricao": "Estatistica, modelagem preditiva, grandes massas de dados e IA.",
+      "nivel_junior_requerido": [
+        "logica",
+        "git",
+        "python",
+        "estatistica",
+        "pandas",
+        "ml"
+      ],
+      "roadmap": {
+        "estudar_primeiro": [
+          {
+            "item": "Estatistica descritiva e inferencia",
+            "preenche": "estatistica"
+          },
+          {
+            "item": "Python + Pandas/NumPy",
+            "preenche": "pandas"
+          },
+          {
+            "item": "Machine Learning com scikit-learn",
+            "preenche": "ml"
+          },
+          {
+            "item": "Git e GitHub",
+            "preenche": "git"
+          },
+          {
+            "item": "Logica e programacao",
+            "preenche": "logica"
+          }
+        ],
+        "certificacoes": [
+          "Google Data Analytics (Coursera)",
+          "IBM Data Science Professional Certificate"
+        ],
+        "projetos_portfolio": [
+          "Analise exploratoria de dataset publico (Kaggle)",
+          "Modelo de classificacao/regressao com avaliacao e documentacao",
+          "Dashboard de insights com Streamlit"
+        ]
+      }
+    },
+    "engenharia_dados": {
+      "nome": "Engenharia de Dados",
+      "descricao": "Arquitetura de dados, pipelines (ETL/ELT) e infraestrutura para Data Lakes.",
+      "nivel_junior_requerido": [
+        "git",
+        "python",
+        "sql",
+        "pandas",
+        "etl_pipelines",
+        "docker"
+      ],
+      "roadmap": {
+        "estudar_primeiro": [
+          {
+            "item": "SQL avancado e modelagem analitica",
+            "preenche": "sql"
+          },
+          {
+            "item": "Pandas e processamento de dados",
+            "preenche": "pandas"
+          },
+          {
+            "item": "Pipelines ETL/ELT (Airflow/dbt)",
+            "preenche": "etl_pipelines"
+          },
+          {
+            "item": "Docker",
+            "preenche": "docker"
+          },
+          {
+            "item": "Git e GitHub",
+            "preenche": "git"
+          }
+        ],
+        "certificacoes": [
+          "Docker Certified Associate (preparacao)",
+          "Google Professional Data Engineer (trilha)"
+        ],
+        "projetos_portfolio": [
+          "Pipeline ETL de API para banco com agendamento",
+          "Data Lake local com Docker (MinIO/Postgres)",
+          "Ambiente reproduzivel com docker-compose"
+        ]
+      }
+    },
+    "ciberseguranca": {
+      "nome": "Ciberseguranca (Security / Pentesting)",
+      "descricao": "Defesa cibernetica, vulnerabilidades, criptografia e redes seguras.",
+      "nivel_junior_requerido": [
+        "linux",
+        "redes",
+        "seguranca_web",
+        "pentest",
+        "git"
+      ],
+      "roadmap": {
+        "estudar_primeiro": [
+          {
+            "item": "Linux e redes (TCP/IP, DNS, HTTP)",
+            "preenche": "linux"
+          },
+          {
+            "item": "Seguranca web (OWASP Top 10)",
+            "preenche": "seguranca_web"
+          },
+          {
+            "item": "Pentest com Metasploit/Burp",
+            "preenche": "pentest"
+          },
+          {
+            "item": "Redes (TCP/IP, DNS)",
+            "preenche": "redes"
+          },
+          {
+            "item": "Git e GitHub",
+            "preenche": "git"
+          }
+        ],
+        "certificacoes": [
+          "CompTIA Security+",
+          "eJPT - eLearnSecurity Junior Penetration Tester"
+        ],
+        "projetos_portfolio": [
+          "Relatorio de auditoria de vulnerabilidade em app web (DVWA)",
+          "Automacao de scan com Nmap/Burp",
+          "CTFs documentados (TryHackMe/HackTheBox)"
+        ]
+      }
+    },
+    "devops": {
+      "nome": "DevOps & SRE",
+      "descricao": "Automacao de processos, CI/CD e conteineres.",
+      "nivel_junior_requerido": [
+        "linux",
+        "redes",
+        "docker",
+        "ci_cd",
+        "git"
+      ],
+      "roadmap": {
+        "estudar_primeiro": [
+          {
+            "item": "Linux e redes",
+            "preenche": "linux"
+          },
+          {
+            "item": "Docker e conteineres",
+            "preenche": "docker"
+          },
+          {
+            "item": "CI/CD com GitHub Actions",
+            "preenche": "ci_cd"
+          },
+          {
+            "item": "Redes (TCP/IP, DNS)",
+            "preenche": "redes"
+          },
+          {
+            "item": "Git e GitHub",
+            "preenche": "git"
+          }
+        ],
+        "certificacoes": [
+          "Linux Foundation CKA (trilha)",
+          "AWS Cloud Practitioner"
+        ],
+        "projetos_portfolio": [
+          "Pipeline CI/CD de app web com deploy automatizado",
+          "Ambiente multi-servico com docker-compose + monitoramento",
+          "Infra como codigo simples com Terraform"
+        ]
+      }
+    },
+    "cloud": {
+      "nome": "Computacao em Nuvem (Cloud Architecture)",
+      "descricao": "Planejamento, migracao e gestao de infraestruturas escalaveis (AWS/Azure/GCP).",
+      "nivel_junior_requerido": [
+        "linux",
+        "docker",
+        "cloud_aws",
+        "redes",
+        "ci_cd"
+      ],
+      "roadmap": {
+        "estudar_primeiro": [
+          {
+            "item": "Fundamentos de rede",
+            "preenche": "redes"
+          },
+          {
+            "item": "Linux (linha de comando)",
+            "preenche": "linux"
+          },
+          {
+            "item": "Servicos core de AWS/Azure",
+            "preenche": "cloud_aws"
+          },
+          {
+            "item": "Docker",
+            "preenche": "docker"
+          },
+          {
+            "item": "CI/CD e automacao de deploy",
+            "preenche": "ci_cd"
+          }
+        ],
+        "certificacoes": [
+          "AWS Certified Cloud Practitioner",
+          "Microsoft Azure Fundamentals (AZ-900)"
+        ],
+        "projetos_portfolio": [
+          "Migracao de app local para nuvem com IaC",
+          "Arquitetura serverless (Lambda/API Gateway)",
+          "Monitoramento de custos e boas praticas de escalabilidade"
+        ]
+      }
+    },
+    "mobile": {
+      "nome": "Desenvolvimento Mobile",
+      "descricao": "Ecossistema de dispositivos moveis (nativo ou multiplataforma).",
+      "nivel_junior_requerido": [
+        "logica",
+        "git",
+        "javascript",
+        "mobile_dev",
+        "react"
+      ],
+      "roadmap": {
+        "estudar_primeiro": [
+          {
+            "item": "Logica e programacao",
+            "preenche": "logica"
+          },
+          {
+            "item": "JavaScript/TypeScript",
+            "preenche": "javascript"
+          },
+          {
+            "item": "React Native ou Flutter",
+            "preenche": "mobile_dev"
+          },
+          {
+            "item": "Git e GitHub",
+            "preenche": "git"
+          },
+          {
+            "item": "React (base para React Native)",
+            "preenche": "react"
+          }
+        ],
+        "certificacoes": [
+          "Meta React Native Specialization (Coursera)",
+          "Associate Android Developer (trilha)"
+        ],
+        "projetos_portfolio": [
+          "App de lista de tarefas offline-first",
+          "App consumindo API com autenticacao",
+          "Publicacao de app em teste interno (Play Store/App Store)"
+        ]
+      }
+    },
+    "qa": {
+      "nome": "Engenharia de Qualidade e Testes (QA)",
+      "descricao": "Testes automatizados, confiabilidade de software e processos de qualidade.",
+      "nivel_junior_requerido": [
+        "logica",
+        "git",
+        "testes_auto",
+        "qualidade",
+        "sql"
+      ],
+      "roadmap": {
+        "estudar_primeiro": [
+          {
+            "item": "Fundamentos de testes e SDLC",
+            "preenche": "qualidade"
+          },
+          {
+            "item": "Testes automatizados (Pytest/Cypress)",
+            "preenche": "testes_auto"
+          },
+          {
+            "item": "SQL para consultas de teste",
+            "preenche": "sql"
+          },
+          {
+            "item": "Git e GitHub",
+            "preenche": "git"
+          },
+          {
+            "item": "Logica de programacao",
+            "preenche": "logica"
+          }
+        ],
+        "certificacoes": [
+          "ISTQB Foundation Level",
+          "Certified Agile Testing (trilha)"
+        ],
+        "projetos_portfolio": [
+          "Suite de testes automatizados para API REST",
+          "Testes E2E de web app com Cypress + CI",
+          "Plano de testes documentado para app real"
+        ]
+      }
+    },
+    "product": {
+      "nome": "Gestao de Produtos (Product Management)",
+      "descricao": "Ponte entre negocio, design e desenvolvimento; agil e priorizacao.",
+      "nivel_junior_requerido": [
+        "agil",
+        "product_discovery",
+        "comunicacao",
+        "requisitos"
+      ],
+      "roadmap": {
+        "estudar_primeiro": [
+          {
+            "item": "Product discovery e personas",
+            "preenche": "product_discovery"
+          },
+          {
+            "item": "Scrum/Kanban na pratica",
+            "preenche": "agil"
+          },
+          {
+            "item": "Analise e documentacao de requisitos",
+            "preenche": "requisitos"
+          },
+          {
+            "item": "Comunicacao e apresentacao",
+            "preenche": "comunicacao"
+          }
+        ],
+        "certificacoes": [
+          "CSPO - Certified Scrum Product Owner",
+          "Google Project Management (Coursera)"
+        ],
+        "projetos_portfolio": [
+          "PRD completo de um produto real com priorizacao (RICE)",
+          "Discovery de problema local com entrevistas e jornada",
+          "Roadmap de produto com metricas (AARRR)"
+        ]
+      }
+    }
+  },
+  "perguntas": [
+    {
+      "id": "experiencia",
+      "etapa": "perfil",
+      "tipo": "selecao",
+      "titulo": "Qual seu nivel de experiencia atual com programacao?",
+      "descricao": "Usado para calibrar o plano de acao (nao altera a pontuacao).",
+      "opcoes": {
+        "nenhum": "Nunca programei / estou comecando",
+        "estudante": "Estudante (faculdade, bootcamp, estudo proprio)",
+        "estagiario": "Estagiario(a)",
+        "junior": "Junior (empregado(a) na area)"
+      },
+      "pesos_por_opcao": {
+        "nenhum": {
+          "back": 0,
+          "front": 0,
+          "ciencia_dados": 0,
+          "engenharia_dados": 0,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 0,
+          "qa": 0,
+          "product": 0
+        },
+        "estudante": {
+          "back": 0,
+          "front": 0,
+          "ciencia_dados": 0,
+          "engenharia_dados": 0,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 0,
+          "qa": 0,
+          "product": 0
+        },
+        "estagiario": {
+          "back": 0,
+          "front": 0,
+          "ciencia_dados": 0,
+          "engenharia_dados": 0,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 0,
+          "qa": 0,
+          "product": 0
+        },
+        "junior": {
+          "back": 0,
+          "front": 0,
+          "ciencia_dados": 0,
+          "engenharia_dados": 0,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 0,
+          "qa": 0,
+          "product": 0
+        }
+      }
+    },
+    {
+      "id": "conhecimentos",
+      "etapa": "perfil",
+      "tipo": "multi",
+      "titulo": "Quais conhecimentos você ja possui?",
+      "descricao": "Marque tudo que já usa com alguma confianca. Usado na analise de gaps.",
+      "opcoes": {},
+      "pesos_por_opcao": {}
+    },
+    {
+      "id": "logica_algoritmos",
+      "etapa": "afinidades",
+      "tipo": "likert",
+      "titulo": "Logica de programacao e algoritmos",
+      "descricao": "Gosto de escrever algoritmos, resolver problemas logicos e depurar codigo.",
+      "min": 1,
+      "max": 5,
+      "rotulos": {
+        "1": "Nada",
+        "3": "Moderado",
+        "5": "Extremamente"
+      },
+      "pesos": {
+        "back": 3,
+        "front": 1,
+        "ciencia_dados": 3,
+        "engenharia_dados": 2,
+        "ciberseguranca": 3,
+        "devops": 1,
+        "cloud": 1,
+        "mobile": 3,
+        "qa": 2,
+        "product": 0
+      }
+    },
+    {
+      "id": "matematica_estatistica",
+      "etapa": "afinidades",
+      "tipo": "likert",
+      "titulo": "Matematica e estatistica",
+      "descricao": "Gosto de calculo, probabilidade, estatistica e formulas.",
+      "min": 1,
+      "max": 5,
+      "rotulos": {
+        "1": "Nada",
+        "3": "Moderado",
+        "5": "Extremamente"
+      },
+      "pesos": {
+        "back": 2,
+        "front": 0,
+        "ciencia_dados": 5,
+        "engenharia_dados": 3,
+        "ciberseguranca": 1,
+        "devops": 1,
+        "cloud": 1,
+        "mobile": 0,
+        "qa": 1,
+        "product": 1
+      }
+    },
+    {
+      "id": "design_visual",
+      "etapa": "afinidades",
+      "tipo": "likert",
+      "titulo": "Design visual e interfaces",
+      "descricao": "Gosto de cuidar de cores, layout, tipografia e estetica de telas.",
+      "min": 1,
+      "max": 5,
+      "rotulos": {
+        "1": "Nada",
+        "3": "Moderado",
+        "5": "Extremamente"
+      },
+      "pesos": {
+        "back": 0,
+        "front": 4,
+        "ciencia_dados": 0,
+        "engenharia_dados": 0,
+        "ciberseguranca": 0,
+        "devops": 0,
+        "cloud": 0,
+        "mobile": 2,
+        "qa": 0,
+        "product": 1
+      }
+    },
+    {
+      "id": "infraestrutura",
+      "etapa": "afinidades",
+      "tipo": "likert",
+      "titulo": "Servidores, redes e infraestrutura",
+      "descricao": "Gosto de configurar maquinas, redes, servidores e ambientes.",
+      "min": 1,
+      "max": 5,
+      "rotulos": {
+        "1": "Nada",
+        "3": "Moderado",
+        "5": "Extremamente"
+      },
+      "pesos": {
+        "back": 2,
+        "front": 0,
+        "ciencia_dados": 0,
+        "engenharia_dados": 3,
+        "ciberseguranca": 2,
+        "devops": 3,
+        "cloud": 3,
+        "mobile": 0,
+        "qa": 1,
+        "product": 0
+      }
+    },
+    {
+      "id": "dados_analise",
+      "etapa": "afinidades",
+      "tipo": "likert",
+      "titulo": "Analise e interpretacao de dados",
+      "descricao": "Gosto de explorar planilhas/bancos, achar padroes e responder perguntas com dados.",
+      "min": 1,
+      "max": 5,
+      "rotulos": {
+        "1": "Nada",
+        "3": "Moderado",
+        "5": "Extremamente"
+      },
+      "pesos": {
+        "back": 1,
+        "front": 0,
+        "ciencia_dados": 4,
+        "engenharia_dados": 4,
+        "ciberseguranca": 1,
+        "devops": 1,
+        "cloud": 1,
+        "mobile": 0,
+        "qa": 1,
+        "product": 1
+      }
+    },
+    {
+      "id": "seguranca",
+      "etapa": "afinidades",
+      "tipo": "likert",
+      "titulo": "Seguranca da informacao",
+      "descricao": "Gosto de pensar em falhas, invasoes, criptografia e protecao de sistemas.",
+      "min": 1,
+      "max": 5,
+      "rotulos": {
+        "1": "Nada",
+        "3": "Moderado",
+        "5": "Extremamente"
+      },
+      "pesos": {
+        "back": 1,
+        "front": 0,
+        "ciencia_dados": 0,
+        "engenharia_dados": 1,
+        "ciberseguranca": 5,
+        "devops": 2,
+        "cloud": 2,
+        "mobile": 0,
+        "qa": 1,
+        "product": 0
+      }
+    },
+    {
+      "id": "automacao_qualidade",
+      "etapa": "afinidades",
+      "tipo": "likert",
+      "titulo": "Automacao, processos e qualidade",
+      "descricao": "Gosto de automatizar tarefas, medir qualidade e melhorar processos.",
+      "min": 1,
+      "max": 5,
+      "rotulos": {
+        "1": "Nada",
+        "3": "Moderado",
+        "5": "Extremamente"
+      },
+      "pesos": {
+        "back": 1,
+        "front": 0,
+        "ciencia_dados": 1,
+        "engenharia_dados": 2,
+        "ciberseguranca": 1,
+        "devops": 3,
+        "cloud": 2,
+        "mobile": 0,
+        "qa": 4,
+        "product": 1
+      }
+    },
+    {
+      "id": "gestao_lideranca",
+      "etapa": "afinidades",
+      "tipo": "likert",
+      "titulo": "Gestao, lideranca e negocio",
+      "descricao": "Gosto de organizar times, priorizar, negociar e pensar em resultado de negocio.",
+      "min": 1,
+      "max": 5,
+      "rotulos": {
+        "1": "Nada",
+        "3": "Moderado",
+        "5": "Extremamente"
+      },
+      "pesos": {
+        "back": 1,
+        "front": 1,
+        "ciencia_dados": 0,
+        "engenharia_dados": 1,
+        "ciberseguranca": 0,
+        "devops": 1,
+        "cloud": 1,
+        "mobile": 1,
+        "qa": 0,
+        "product": 5
+      }
+    },
+    {
+      "id": "mobile_apps",
+      "etapa": "afinidades",
+      "tipo": "likert",
+      "titulo": "Aplicativos moveis",
+      "descricao": "Gosto de usar e criar apps para celular (Android/iOS).",
+      "min": 1,
+      "max": 5,
+      "rotulos": {
+        "1": "Nada",
+        "3": "Moderado",
+        "5": "Extremamente"
+      },
+      "pesos": {
+        "back": 1,
+        "front": 2,
+        "ciencia_dados": 0,
+        "engenharia_dados": 0,
+        "ciberseguranca": 0,
+        "devops": 0,
+        "cloud": 0,
+        "mobile": 5,
+        "qa": 0,
+        "product": 1
+      }
+    },
+    {
+      "id": "comunicacao_pessoas",
+      "etapa": "afinidades",
+      "tipo": "likert",
+      "titulo": "Comunicacao e trabalho com pessoas",
+      "descricao": "Gosto de explicar ideias, apresentar, ouvir e trabalhar em equipe.",
+      "min": 1,
+      "max": 5,
+      "rotulos": {
+        "1": "Nada",
+        "3": "Moderado",
+        "5": "Extremamente"
+      },
+      "pesos": {
+        "back": 1,
+        "front": 2,
+        "ciencia_dados": 1,
+        "engenharia_dados": 0,
+        "ciberseguranca": 1,
+        "devops": 1,
+        "cloud": 1,
+        "mobile": 1,
+        "qa": 1,
+        "product": 4
+      }
+    },
+    {
+      "id": "preferencia_diaria",
+      "etapa": "objetivos",
+      "tipo": "selecao",
+      "titulo": "O que voce mais gosta de fazer no dia a dia?",
+      "descricao": "Escolha a atividade que mais te atrai.",
+      "opcoes": {
+        "algoritmos": "Escrever algoritmos e logica de programacao",
+        "layouts": "Criar layouts e interfaces visuais",
+        "servidores": "Lidar com servidores e infraestrutura",
+        "dados_brutos": "Analizar dados brutos e extrair padroes",
+        "seguranca": "Garantir a seguranca de sistemas",
+        "qualidade": "Garantir qualidade e testar software",
+        "negocio": "Liderar pessoas, produto e decisoes de negocio",
+        "pipelines": "Construir pipelines e fluxos de dados",
+        "mobile": "Desenvolver aplicativos para celular"
+      },
+      "pesos_por_opcao": {
+        "algoritmos": {
+          "back": 8,
+          "front": 1,
+          "ciencia_dados": 3,
+          "engenharia_dados": 2,
+          "ciberseguranca": 2,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 3,
+          "qa": 2,
+          "product": 0
+        },
+        "layouts": {
+          "back": 0,
+          "front": 8,
+          "ciencia_dados": 0,
+          "engenharia_dados": 0,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 4,
+          "qa": 0,
+          "product": 2
+        },
+        "servidores": {
+          "back": 2,
+          "front": 0,
+          "ciencia_dados": 0,
+          "engenharia_dados": 2,
+          "ciberseguranca": 2,
+          "devops": 7,
+          "cloud": 7,
+          "mobile": 0,
+          "qa": 1,
+          "product": 0
+        },
+        "dados_brutos": {
+          "back": 0,
+          "front": 0,
+          "ciencia_dados": 7,
+          "engenharia_dados": 6,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 0,
+          "qa": 1,
+          "product": 0
+        },
+        "seguranca": {
+          "back": 0,
+          "front": 0,
+          "ciencia_dados": 0,
+          "engenharia_dados": 1,
+          "ciberseguranca": 8,
+          "devops": 2,
+          "cloud": 1,
+          "mobile": 0,
+          "qa": 1,
+          "product": 0
+        },
+        "qualidade": {
+          "back": 1,
+          "front": 0,
+          "ciencia_dados": 0,
+          "engenharia_dados": 1,
+          "ciberseguranca": 0,
+          "devops": 2,
+          "cloud": 0,
+          "mobile": 0,
+          "qa": 8,
+          "product": 1
+        },
+        "negocio": {
+          "back": 1,
+          "front": 1,
+          "ciencia_dados": 0,
+          "engenharia_dados": 0,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 1,
+          "qa": 0,
+          "product": 8
+        },
+        "pipelines": {
+          "back": 0,
+          "front": 0,
+          "ciencia_dados": 2,
+          "engenharia_dados": 8,
+          "ciberseguranca": 0,
+          "devops": 1,
+          "cloud": 1,
+          "mobile": 0,
+          "qa": 0,
+          "product": 0
+        },
+        "mobile": {
+          "back": 1,
+          "front": 3,
+          "ciencia_dados": 0,
+          "engenharia_dados": 0,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 8,
+          "qa": 0,
+          "product": 1
+        }
+      }
+    },
+    {
+      "id": "linguagem",
+      "etapa": "objetivos",
+      "tipo": "selecao",
+      "titulo": "Linguagem/ferramenta de maior afinidade atual",
+      "descricao": "Onde voce se sente mais confortavel hoje.",
+      "opcoes": {
+        "python": "Python",
+        "javascript": "JavaScript / TypeScript",
+        "linux_redes": "Linux / Redes",
+        "nenhuma": "Nenhuma / Iniciante"
+      },
+      "pesos_por_opcao": {
+        "python": {
+          "back": 4,
+          "front": 1,
+          "ciencia_dados": 6,
+          "engenharia_dados": 5,
+          "ciberseguranca": 1,
+          "devops": 2,
+          "cloud": 1,
+          "mobile": 2,
+          "qa": 2,
+          "product": 1
+        },
+        "javascript": {
+          "back": 3,
+          "front": 6,
+          "ciencia_dados": 1,
+          "engenharia_dados": 1,
+          "ciberseguranca": 1,
+          "devops": 1,
+          "cloud": 1,
+          "mobile": 6,
+          "qa": 2,
+          "product": 1
+        },
+        "linux_redes": {
+          "back": 2,
+          "front": 0,
+          "ciencia_dados": 1,
+          "engenharia_dados": 2,
+          "ciberseguranca": 6,
+          "devops": 6,
+          "cloud": 5,
+          "mobile": 0,
+          "qa": 1,
+          "product": 0
+        },
+        "nenhuma": {
+          "back": 1,
+          "front": 2,
+          "ciencia_dados": 1,
+          "engenharia_dados": 1,
+          "ciberseguranca": 1,
+          "devops": 1,
+          "cloud": 1,
+          "mobile": 2,
+          "qa": 2,
+          "product": 3
+        }
+      }
+    },
+    {
+      "id": "entrega_valor",
+      "etapa": "objetivos",
+      "tipo": "selecao",
+      "titulo": "Que tipo de valor voce prefere entregar?",
+      "descricao": "Onde voce quer fazer diferenca.",
+      "opcoes": {
+        "usuario_final": "O produto final para o usuario",
+        "infraestrutura": "A infraestrutura que sustenta o sistema",
+        "seguranca": "A seguranca contra invasoes",
+        "dados_insights": "Dados e insights para decisoes",
+        "negocio": "Decisoes e valor de negocio"
+      },
+      "pesos_por_opcao": {
+        "usuario_final": {
+          "back": 4,
+          "front": 5,
+          "ciencia_dados": 1,
+          "engenharia_dados": 0,
+          "ciberseguranca": 1,
+          "devops": 1,
+          "cloud": 1,
+          "mobile": 4,
+          "qa": 3,
+          "product": 2
+        },
+        "infraestrutura": {
+          "back": 2,
+          "front": 0,
+          "ciencia_dados": 1,
+          "engenharia_dados": 5,
+          "ciberseguranca": 2,
+          "devops": 5,
+          "cloud": 5,
+          "mobile": 0,
+          "qa": 1,
+          "product": 0
+        },
+        "seguranca": {
+          "back": 1,
+          "front": 0,
+          "ciencia_dados": 0,
+          "engenharia_dados": 1,
+          "ciberseguranca": 6,
+          "devops": 1,
+          "cloud": 1,
+          "mobile": 0,
+          "qa": 1,
+          "product": 0
+        },
+        "dados_insights": {
+          "back": 0,
+          "front": 0,
+          "ciencia_dados": 5,
+          "engenharia_dados": 3,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 0,
+          "qa": 0,
+          "product": 2
+        },
+        "negocio": {
+          "back": 1,
+          "front": 1,
+          "ciencia_dados": 1,
+          "engenharia_dados": 0,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 1,
+          "qa": 0,
+          "product": 6
+        }
+      }
+    },
+    {
+      "id": "aspecto_tecnico",
+      "etapa": "objetivos",
+      "tipo": "selecao",
+      "titulo": "Qual aspecto do trabalho tecnico mais te atrai?",
+      "descricao": "O tipo de problema que voce quer resolver.",
+      "opcoes": {
+        "automacao": "Automatizar processos e operacoes",
+        "arquitetura": "Projetar arquiteturas escalaveis",
+        "descoberta": "Descobrir padroes e insights",
+        "resolucao": "Investigar e resolver problemas complexos",
+        "criacao": "Criar experiencias para pessoas"
+      },
+      "pesos_por_opcao": {
+        "automacao": {
+          "back": 1,
+          "front": 0,
+          "ciencia_dados": 0,
+          "engenharia_dados": 3,
+          "ciberseguranca": 0,
+          "devops": 5,
+          "cloud": 1,
+          "mobile": 0,
+          "qa": 2,
+          "product": 0
+        },
+        "arquitetura": {
+          "back": 3,
+          "front": 0,
+          "ciencia_dados": 0,
+          "engenharia_dados": 3,
+          "ciberseguranca": 0,
+          "devops": 1,
+          "cloud": 6,
+          "mobile": 0,
+          "qa": 0,
+          "product": 0
+        },
+        "descoberta": {
+          "back": 0,
+          "front": 0,
+          "ciencia_dados": 5,
+          "engenharia_dados": 2,
+          "ciberseguranca": 1,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 0,
+          "qa": 1,
+          "product": 1
+        },
+        "resolucao": {
+          "back": 2,
+          "front": 0,
+          "ciencia_dados": 1,
+          "engenharia_dados": 0,
+          "ciberseguranca": 3,
+          "devops": 1,
+          "cloud": 0,
+          "mobile": 0,
+          "qa": 3,
+          "product": 0
+        },
+        "criacao": {
+          "back": 1,
+          "front": 4,
+          "ciencia_dados": 0,
+          "engenharia_dados": 0,
+          "ciberseguranca": 0,
+          "devops": 0,
+          "cloud": 0,
+          "mobile": 3,
+          "qa": 0,
+          "product": 2
+        }
+      }
+    }
+  ],
+  "regras": [
+    {
+      "id": "R01",
+      "descricao": "Dados brutos + afinidade matematica alta (>=4) + Python = Ciencia de Dados",
+      "condicoes": {
+        "preferencia_diaria": "dados_brutos",
+        "matematica_estatistica": {
+          "min": 4
+        },
+        "linguagem": "python"
+      },
+      "efeito": {
+        "ciencia_dados": 12
+      }
+    },
+    {
+      "id": "R02",
+      "descricao": "Dados brutos + forte analise de dados (>=4) = padroes/insights (DS + EGD)",
+      "condicoes": {
+        "preferencia_diaria": "dados_brutos",
+        "dados_analise": {
+          "min": 4
+        }
+      },
+      "efeito": {
+        "ciencia_dados": 8,
+        "engenharia_dados": 2
+      }
+    },
+    {
+      "id": "R03",
+      "descricao": "Pipelines + forte automacao (>=4) = Engenharia de Dados (ETL/ELT)",
+      "condicoes": {
+        "preferencia_diaria": "pipelines",
+        "automacao_qualidade": {
+          "min": 4
+        }
+      },
+      "efeito": {
+        "engenharia_dados": 10
+      }
+    },
+    {
+      "id": "R04",
+      "descricao": "Seguranca como preferencia diaria principal = Ciberseguranca",
+      "condicoes": {
+        "preferencia_diaria": "seguranca"
+      },
+      "efeito": {
+        "ciberseguranca": 10
+      }
+    },
+    {
+      "id": "R05",
+      "descricao": "Seguranca + Linux/Redes = pentest/defesa cibernetica",
+      "condicoes": {
+        "preferencia_diaria": "seguranca",
+        "linguagem": "linux_redes"
+      },
+      "efeito": {
+        "ciberseguranca": 6
+      }
+    },
+    {
+      "id": "R06",
+      "descricao": "Servidores + forte automacao (>=4) + gostar de automatizar = DevOps & SRE",
+      "condicoes": {
+        "preferencia_diaria": "servidores",
+        "automacao_qualidade": {
+          "min": 4
+        },
+        "aspecto_tecnico": "automacao"
+      },
+      "efeito": {
+        "devops": 10
+      }
+    },
+    {
+      "id": "R07",
+      "descricao": "Servidores + forte infraestrutura (>=4) + gostar de arquitetura = Cloud Architecture",
+      "condicoes": {
+        "preferencia_diaria": "servidores",
+        "infraestrutura": {
+          "min": 4
+        },
+        "aspecto_tecnico": "arquitetura"
+      },
+      "efeito": {
+        "cloud": 12
+      }
+    },
+    {
+      "id": "R08",
+      "descricao": "Algoritmos + Python + entrega ao usuario final = Back-end",
+      "condicoes": {
+        "preferencia_diaria": "algoritmos",
+        "linguagem": "python",
+        "entrega_valor": "usuario_final"
+      },
+      "efeito": {
+        "back": 10
+      }
+    },
+    {
+      "id": "R09",
+      "descricao": "Layouts + JavaScript + criar experiencias = Front-end",
+      "condicoes": {
+        "preferencia_diaria": "layouts",
+        "linguagem": "javascript",
+        "aspecto_tecnico": "criacao"
+      },
+      "efeito": {
+        "front": 10
+      }
+    },
+    {
+      "id": "R10",
+      "descricao": "Mobile + JavaScript = React Native/multiplataforma",
+      "condicoes": {
+        "preferencia_diaria": "mobile",
+        "linguagem": "javascript"
+      },
+      "efeito": {
+        "mobile": 10
+      }
+    },
+    {
+      "id": "R11",
+      "descricao": "Qualidade + automacao (>=3) = QA com testes automatizados",
+      "condicoes": {
+        "preferencia_diaria": "qualidade",
+        "automacao_qualidade": {
+          "min": 3
+        }
+      },
+      "efeito": {
+        "qa": 10
+      }
+    },
+    {
+      "id": "R12",
+      "descricao": "Negocio + entrega de valor de negocio = Product Management",
+      "condicoes": {
+        "preferencia_diaria": "negocio",
+        "entrega_valor": "negocio"
+      },
+      "efeito": {
+        "product": 12
+      }
+    },
+    {
+      "id": "R13",
+      "descricao": "Forte gestao (>=4) + forte comunicacao (>=4) = ponte negocio/dev",
+      "condicoes": {
+        "gestao_lideranca": {
+          "min": 4
+        },
+        "comunicacao_pessoas": {
+          "min": 4
+        }
+      },
+      "efeito": {
+        "product": 8
+      }
+    },
+    {
+      "id": "R14",
+      "descricao": "Design visual forte (>=4) + entrega ao usuario = UI/UX",
+      "condicoes": {
+        "design_visual": {
+          "min": 4
+        },
+        "entrega_valor": "usuario_final"
+      },
+      "efeito": {
+        "front": 8
+      }
+    },
+    {
+      "id": "R15",
+      "descricao": "Matematica alta (>=4) + forte analise de dados (>=4) = modelagem/IA",
+      "condicoes": {
+        "matematica_estatistica": {
+          "min": 4
+        },
+        "dados_analise": {
+          "min": 4
+        }
+      },
+      "efeito": {
+        "ciencia_dados": 8
+      }
+    },
+    {
+      "id": "R16",
+      "descricao": "Forte infraestrutura (>=4) + Linux/Redes = afinidade com infra (DevOps+Cloud)",
+      "condicoes": {
+        "infraestrutura": {
+          "min": 4
+        },
+        "linguagem": "linux_redes"
+      },
+      "efeito": {
+        "devops": 3,
+        "cloud": 3
+      }
+    }
+  ],
+  "penalidades": [
+    {
+      "id": "P01",
+      "descricao": "Perfil visual forte sem logica: reduz Back-end/Engenharia de Dados",
+      "condicoes": {
+        "design_visual": {
+          "min": 4
+        },
+        "logica_algoritmos": {
+          "max": 2
+        }
+      },
+      "efeito": {
+        "back": -6,
+        "engenharia_dados": -4
+      }
+    },
+    {
+      "id": "P02",
+      "descricao": "Forte logica sem afinidade por design: reduz Front-end",
+      "condicoes": {
+        "logica_algoritmos": {
+          "min": 4
+        },
+        "design_visual": {
+          "max": 2
+        }
+      },
+      "efeito": {
+        "front": -6
+      }
+    },
+    {
+      "id": "P03",
+      "descricao": "Baixa matematica (<=2): reduz Ciencia de Dados",
+      "condicoes": {
+        "matematica_estatistica": {
+          "max": 2
+        }
+      },
+      "efeito": {
+        "ciencia_dados": -8
+      }
+    },
+    {
+      "id": "P04",
+      "descricao": "Baixa afinidade por infraestrutura (<=2): reduz DevOps/Cloud",
+      "condicoes": {
+        "infraestrutura": {
+          "max": 2
+        }
+      },
+      "efeito": {
+        "devops": -6,
+        "cloud": -6
+      }
+    },
+    {
+      "id": "P05",
+      "descricao": "Pouca automatizacao/qualidade (<=2): reduz QA",
+      "condicoes": {
+        "automacao_qualidade": {
+          "max": 2
+        }
+      },
+      "efeito": {
+        "qa": -5
+      }
+    },
+    {
+      "id": "P06",
+      "descricao": "Quase nada de seguranca (<=1): reduz Ciberseguranca",
+      "condicoes": {
+        "seguranca": {
+          "max": 1
+        }
+      },
+      "efeito": {
+        "ciberseguranca": -5
+      }
+    },
+    {
+      "id": "P07",
+      "descricao": "Pouca gestao e pouca comunicacao (<=2): reduz Product Management",
+      "condicoes": {
+        "gestao_lideranca": {
+          "max": 2
+        },
+        "comunicacao_pessoas": {
+          "max": 2
+        }
+      },
+      "efeito": {
+        "product": -6
+      }
+    }
+  ]
+}
